@@ -1,7 +1,8 @@
 import flet as ft
+
+from UI.alert import AlertManager
 from UI.view import View
 from model.model import Autonoleggio
-
 '''
     CONTROLLER:
     - Funziona da intermediario tra MODELLO e VIEW
@@ -29,3 +30,18 @@ class Controller:
 
     # Altre Funzioni Event Handler
     # TODO
+    def mostra(self, e):
+        #print("ciao")
+        automobili=self._model.get_automobili()
+        for i in automobili:
+            self._view.lista_auto.controls.append(ft.Text(i))
+        self._view.update()
+
+    def cerca(self, e):
+        modello=self._view.input_modello_auto.value
+        automobili = self._model.cerca_automobili_per_modello(modello)
+        for i in automobili:
+            self._view.lista_auto_ricerca.controls.append(ft.Text(i))
+        #print(automobili)
+        self._view.input_modello_auto.value = ""
+        self._view.update()

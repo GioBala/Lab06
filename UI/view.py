@@ -56,7 +56,7 @@ class View:
         self.input_modello_auto = ft.TextField(label="Modello")
 
         # ListView per mostrare il risultato della ricerca auto per modello
-        self.lista_auto_ricerca = ft.ListView(expand=True, spacing=5, padding=10, auto_scroll=True)
+        self.lista_auto_ricerca = ft.ListView(expand=True,spacing=5, padding=10, auto_scroll=True)
 
         # --- PULSANTI e TOGGLE associati a EVENTI ---
         self.toggle_cambia_tema = ft.Switch(label="Tema scuro", value=True, on_change=self.cambia_tema)
@@ -64,7 +64,8 @@ class View:
 
         # Altri Pulsanti da implementare (es. "Mostra" e "Cerca")
         # TODO
-
+        pulsante_mostra=ft.ElevatedButton("Mostra", on_click=self.controller.mostra)
+        pulsante_cerca=ft.ElevatedButton("Cerca", on_click=self.controller.cerca)
         # --- LAYOUT ---
         self.page.add(
             self.toggle_cambia_tema,
@@ -83,9 +84,21 @@ class View:
 
             # Sezione 3
             # TODO
-
+            ft.Text("Automobili", size=20),
+            ft.Row(spacing=200,
+                   controls=[ pulsante_mostra],
+                    alignment=ft.MainAxisAlignment.CENTER),
+            self.lista_auto,
+            ft.Divider(),
             # Sezione 4
             # TODO
+            ft.Text("Cerca automobili", size=20),
+            ft.Row(spacing=200,
+                   controls=[self.input_modello_auto,pulsante_cerca],
+                  alignment=ft.MainAxisAlignment.CENTER),
+            self.lista_auto_ricerca,
+
+
         )
 
     def cambia_tema(self, e):
